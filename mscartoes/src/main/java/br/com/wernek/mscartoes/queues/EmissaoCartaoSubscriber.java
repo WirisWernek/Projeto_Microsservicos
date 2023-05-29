@@ -13,9 +13,11 @@ import br.com.wernek.mscartoes.models.entities.DadosSolicitacaoEmissaoCartao;
 import br.com.wernek.mscartoes.models.repository.CartaoRepository;
 import br.com.wernek.mscartoes.models.repository.ClienteCartaoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EmissaoCartaoSubscriber {
 
 	private final CartaoRepository cartaoRepository;
@@ -34,7 +36,10 @@ public class EmissaoCartaoSubscriber {
 			clienteCartao.setLimite( dados.getLimiteLiberado() );
 			clienteCartaoRepository.save( clienteCartao );
 		} catch ( JsonProcessingException jpe ) {
+			log.error("Erro ao serializar o JSON", jpe);
 			jpe.printStackTrace();
+		}catch(Exception e){
+			log.error("Erro ao receber a solicitação de cartão", e);
 		}
 
 	}
