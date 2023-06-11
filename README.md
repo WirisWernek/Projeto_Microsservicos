@@ -7,3 +7,5 @@ Próximos passos:
 - Add testes unitários para cada microserviço e testes de integração
 - Add persistência das ações(criação de um histórico de ações)
 - Criação de uma interface de acesso Web com Angular ou Vue 
+- Criação de um arquivo do compose para facilitar o start dos serviços
+- Exportação das configurações do Keycloak

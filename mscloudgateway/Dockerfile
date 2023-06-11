@@ -6,6 +6,7 @@ RUN mvn clean package -DskipTests
 FROM openjdk:11
 WORKDIR /app
 COPY --from=build ./app/target/*.jar ./app.jar
-ARG RABBITMQ_SERVER=rabbitmq_host
 ARG EUREKA_SERVER=eureka_server
+ARG KEYCLOAK_SERVER=keycloak
+ARG KEYCLOAK_PORT=8080
 ENTRYPOINT java -jar app.jar
