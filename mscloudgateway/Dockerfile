@@ -9,4 +9,4 @@ COPY --from=build ./app/target/*.jar ./app.jar
 ARG EUREKA_SERVER=eureka_server
 ARG KEYCLOAK_SERVER=keycloak
 ARG KEYCLOAK_PORT=8080
-ENTRYPOINT java -jar app.jar
+ENTRYPOINT java -jar -Dspring.profiles.active=production app.jar
