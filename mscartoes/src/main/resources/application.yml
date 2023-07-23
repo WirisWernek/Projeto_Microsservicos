@@ -6,7 +6,21 @@ spring:
     port: 5672
     username: guest
     password: guest
-    
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cartoes
+    username: postgres
+    password: itix.123
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
 server:
   port: 0
   

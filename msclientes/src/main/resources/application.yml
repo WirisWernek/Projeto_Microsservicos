@@ -1,6 +1,21 @@
 spring:
   application:
     name: msclientes
+  datasource:
+    url: jdbc:postgresql://localhost:5432/clientes
+    username: postgres
+    password: itix.123
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      
     
 server:
   port: 0
