@@ -2,7 +2,7 @@
 
 Próximos passos:
 - Add uma interface de visualização das métricas gerados pelo actuator
-- Add persistência de dados no postgreSQL no lugar do H2
+- ~~Add persistência de dados no postgreSQL no lugar do H2~~
 - Parametrizar as credenciais para variáveis de ambiente
 - Add testes unitários para cada microserviço e testes de integração
 - Add persistência das ações(criação de um histórico de ações)
