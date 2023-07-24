@@ -7,5 +7,9 @@ FROM openjdk:11
 WORKDIR /app
 COPY --from=build ./app/target/*.jar ./app.jar
 ARG RABBITMQ_SERVER=rabbitmq_host
+ARG RABBITMQ_USER=guest
+ARG RABBITMQ_PASSWORD=guest
 ARG EUREKA_SERVER=eureka_server
+ARG EUREKA_USER=cursoms-eureka-user
+ARG EUREKA_PASSWORD=R0To1up4fY2E96XTjld8uhPwJ
 ENTRYPOINT java -jar -Dspring.profiles.active=production app.jar

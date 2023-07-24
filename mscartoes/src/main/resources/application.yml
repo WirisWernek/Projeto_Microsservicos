@@ -2,14 +2,14 @@ spring:
   application:
     name: mscartoes
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_SERVER}
     port: 5672
-    username: guest
-    password: guest
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
   datasource:
-    url: jdbc:postgresql://localhost:5432/cartoes
-    username: postgres
-    password: itix.123
+    url: jdbc:postgresql://${POSTGRES_SERVER}:5432/cartoes
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     show-sql: true
     generate-ddl: true
@@ -27,7 +27,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://cursoms-eureka-user:R0To1up4fY2E96XTjld8uhPwJ@localhost:8761/eureka
+      defaultZone: http://${EUREKA_USER}:${EUREKA_PASSWORD}@${EUREKA_SERVER}:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     
