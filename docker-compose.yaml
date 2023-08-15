@@ -1,0 +1,80 @@
+version: "3"
+
+volumes: 
+  dados:
+
+networks:
+ rede: 
+  name: cursoms-network
+  external: true
+
+services:
+  eureka-server:
+    image: cursoms-eureka:1.5
+    ports:
+      - 8761:8761
+    networks:
+      - rede
+  
+  mscloudgateway:
+    image: cursoms-gateway:1.5
+    networks:
+      - rede
+    environment:
+      - EUREKA_SERVER=eureka-server
+      - EUREKA_USER=cursoms-eureka-user
+      - EUREKA_PASSWORD=R0To1up4fY2E96XTjld8uhPwJ
+      - KEYCLOAK_SERVER=keycloak
+      - KEYCLOAK_PORT=8080
+    depends_on:
+      - eureka-server
+    ports:
+      - 8080:8080
+  
+  mscartoes:
+    image: cursoms-cartoes:1.5
+    networks:
+      - rede
+    environment:
+      - RABBITMQ_SERVER=rabbitmq
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - POSTGRES_SERVER=postgresserver
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=itix.123
+      - EUREKA_SERVER=eureka-server
+      - EUREKA_USER=cursoms-eureka-user
+      - EUREKA_PASSWORD=R0To1up4fY2E96XTjld8uhPwJ
+    depends_on:
+      - eureka-server
+      - mscloudgateway
+
+  mscliente:
+    image: cursoms-cliente:1.5
+    networks:
+      - rede
+    environment:
+      - POSTGRES_SERVER=postgresserver
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=itix.123
+      - EUREKA_SERVER=eureka-server
+      - EUREKA_USER=cursoms-eureka-user
+      - EUREKA_PASSWORD=R0To1up4fY2E96XTjld8uhPwJ
+    depends_on:
+      - eureka-server
+      - mscloudgateway
+
+  msavaliadorcredito:
+    image: cursoms-avaliadorcredito:1.5
+    environment:
+      - RABBITMQ_SERVER=rabbitmq_host
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - EUREKA_SERVER=eureka-server
+      - EUREKA_USER=cursoms-eureka-user
+      - EUREKA_PASSWORD=R0To1up4fY2E96XTjld8uhPwJ
+    networks:
+      - rede
+    depends_on:
+        - eureka-server
+        - mscloudgateway
